@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 import Transaction from "./models/Transaction.js";
+import  { getApiHealth } from "./controllers/health.js"
 
 const app = express();
 app.use(express.json());
@@ -15,12 +16,7 @@ async function connectMongoDB() {
 }
 connectMongoDB();
 
-app.get("/health", async (req, res) => {
-  res.json({
-    success: true,
-    message: " All Good✅",
-  });
-});
+app.get("/api/health", getApiHealth);
 
 app.post("/api/transaction", async (req, res) => {
   const { amount, type, category, description } = req.body;
