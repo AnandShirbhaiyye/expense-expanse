@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
+import Transaction from "./models/Transaction.js";
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,31 @@ app.get('/health', async (req, res)=>{
     message:" All Good✅"
   })
 })
+
+app.post('/api/transaction', async (req, res)=>{
+  const {amount, type, category, description} = req.body;
+
+  const transaction = new Transaction ({
+    amount,
+    category,
+    type,
+    description
+  });
+  try{
+    const savedTransaction = await transaction.save();
+
+    return res.json({
+      success: true,
+      message: 'Transaction saved successfully',
+      transaction: savedTransaction
+    })
+  }catch(err){
+   return res.json({
+    success: false,
+    message: err.message
+   })
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 
