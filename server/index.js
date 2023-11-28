@@ -2,8 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
-import Transaction from "./models/Transaction.js";
-import  { getApiHealth } from "./controllers/health.js"
+
+import  { getApiHealth } from "./controllers/health.js";
+import { postApiTransaction, getApiTransaction } from "./controllers/transaction.js";
 
 const app = express();
 app.use(express.json());
@@ -18,40 +19,9 @@ connectMongoDB();
 
 app.get("/api/health", getApiHealth);
 
-app.post("/api/transaction", async (req, res) => {
-  const { amount, type, category, description } = req.body;
+app.post("/api/transaction", postApiTransaction);
 
-  const transaction = new Transaction({
-    amount,
-    category,
-    type,
-    description,
-  });
-  try {
-    const savedTransaction = await transaction.save();
-
-    return res.json({
-      success: true,
-      message: "Transaction saved successfully",
-      data: savedTransaction,
-    });
-  } catch (err) {
-    return res.json({
-      success: false,
-      message: err.message,
-    });
-  }
-});
-
-app.get("/api/transactions", async (req, res) => {
-  const allTransactions = await Transaction.find();
-
-  return res.json({
-    success: true,
-    message: "successfully fetched all transaction",
-    data: allTransactions,
-  });
-});
+app.get("/api/transactions", getApiTransaction);
 
 const PORT = process.env.PORT || 5000;
 
