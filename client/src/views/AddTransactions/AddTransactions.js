@@ -2,7 +2,9 @@ import React from 'react'
 
 function AddTransactions() {
   return (
-    <div>AddTransactions</div>
+   <>
+   <h1 className='text-center'>Add Transactions</h1>
+   </>
   )
 }
 

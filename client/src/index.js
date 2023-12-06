@@ -9,7 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Home from './views/Home/Home';
 import Login from './views/Login/Login';
 import SignUp from './views/SignUp/SignUp';
-import AddTransactions from './views/AddTransactions'
+import AddTransactions from './views/AddTransactions/AddTransactions';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([

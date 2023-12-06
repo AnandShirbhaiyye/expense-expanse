@@ -5,6 +5,7 @@ dotenv.config();
 
 import { getApiHealth } from "./controllers/health.js";
 import { postApiTransaction, getApiTransaction } from "./controllers/transaction.js";
+import { postApiSignup } from "./controllers/user.js";
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,8 @@ async function connectMongoDB() {
 connectMongoDB();
 
 app.get("/api/health", getApiHealth);
+
+app.post('/signup', postApiSignup);
 
 app.post("/api/transaction", postApiTransaction);
 
