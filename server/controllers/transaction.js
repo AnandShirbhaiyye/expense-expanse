@@ -39,4 +39,24 @@ const getApiTransaction = async (req, res) => {
   });
 };
 
-export { postApiTransaction, getApiTransaction };
+const getApiTransactionById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const showTransaction = await Transaction.findOne({ _id: id });
+
+    return responder({
+      res,
+      success: true,
+      data: showTransaction,
+      message: "transactions show successfully",
+    });
+  } catch (err) {
+    return responder({
+      res,
+      success: false,
+      message: "transactions are not fetch",
+    });
+  }
+};
+
+export { postApiTransaction, getApiTransaction, getApiTransactionById };
