@@ -1,5 +1,6 @@
 import React from "react";
 import "./SignUp.css";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 
 function SignUp() {
@@ -65,6 +66,12 @@ function SignUp() {
               <button type="button" className="btn btn-dark w-100 mb-3">
                 SignUp
               </button>
+              <p className="text-center">
+                Already have an Account,
+                <Link to="/login" className="signup-link">
+                  <b>login</b>
+                </Link>
+              </p>
             </div>
           </div>
         </div>
