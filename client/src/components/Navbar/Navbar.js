@@ -10,7 +10,7 @@ function Navbar() {
             className="navbar-brand  fs-4 color-title bg-body-create"
             to="/"
           >
-            Expense-Expanse
+            Expense-Expanse💰
           </Link>
           <button
             className="navbar-toggler"

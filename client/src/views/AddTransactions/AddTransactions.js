@@ -1,9 +1,10 @@
 import React from 'react'
+import Navbar from '../../components/Navbar/Navbar'
 
 function AddTransactions() {
   return (
    <>
-   <h1 className='text-center'>Add Transactions</h1>
+   <Navbar/>
    </>
   )
 }
