@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import showToast from "crunchy-toast";
+import axios from "axios";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function loginUser() {
+    const response = await axios.post("/login", {
+      email: email,
+      password: password,
+    });
+    showToast(response.data.message, "success", 3000);
+
+    if (response?.data?.success) {
+      localStorage.setItem("user", JSON.stringify(response?.data?.data));
+      window.location.href = "/";
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -14,13 +32,25 @@ function Login() {
             type="email"
             className="form-control mb-4"
             placeholder="enter your email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <input
             type="password"
             className="form-control mb-4"
             placeholder="enter your Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
-          <button type="button" className="btn btn-dark w-100 mb-3">
+          <button
+            type="button"
+            className="btn btn-dark w-100 mb-3"
+            onClick={loginUser}
+          >
             Login
           </button>
           <p className="text-center">
