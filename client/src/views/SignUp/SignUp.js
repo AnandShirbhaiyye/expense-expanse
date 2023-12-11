@@ -1,39 +1,38 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
-import showToast from 'crunchy-toast';
+import showToast from "crunchy-toast";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 
 function SignUp() {
-
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [mobile, setMobile] = useState('')
-  const [address, setAddress] = useState('')
-  const [gender, setGender] = useState("male")
-  const [password, setPassword] = useState('')
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [address, setAddress] = useState("");
+  const [gender, setGender] = useState("male");
+  const [password, setPassword] = useState("");
 
   async function signupUser() {
-    if(!name){
-        showToast('name is required', 'alert', 4000);
-        return;
+    if (!name) {
+      showToast("name is required", "alert", 4000);
+      return;
     }
-    if(!email){
-        showToast('email is required', 'alert', 4000);
-        return;
+    if (!email) {
+      showToast("email is required", "alert", 4000);
+      return;
     }
-    if(!password){
-        showToast('password is required', 'alert', 4000);
-        return;
+    if (!password) {
+      showToast("password is required", "alert", 4000);
+      return;
     }
-    if(!mobile){
-        showToast('mobile number is required', 'alert', 4000);
-        return;
+    if (!mobile) {
+      showToast("mobile number is required", "alert", 4000);
+      return;
     }
-    if(!address){
-        showToast('address is required', 'alert', 4000);
-        return;
+    if (!address) {
+      showToast("address is required", "alert", 4000);
+      return;
     }
     const response = await axios.post("/signup", {
       name: name,
@@ -45,10 +44,10 @@ function SignUp() {
     });
     console.log(response.data);
     if (response.data.success) {
-      showToast(response.data.message, 'success', 3000);
+      showToast(response.data.message, "success", 3000);
       window.location.href = "/login";
     } else {
-    showToast(response.data.message, 'alert', 3000);
+      showToast(response.data.message, "alert", 3000);
 
       setName("");
       setEmail("");
@@ -57,6 +56,16 @@ function SignUp() {
       setAddress("");
     }
   }
+
+  useEffect(() => {
+    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+    console.log(storageUser);
+
+    if (storageUser?.email) {
+      showToast("You are already logged in!", "alert", 4000);
+      window.location.href = "/";
+    }
+  }, []);
 
   return (
     <>
@@ -72,7 +81,8 @@ function SignUp() {
                   className="form-control mb-4"
                   placeholder="enter your name"
                   value={name}
-                  onChange={(e)=>{setName(e.target.value)
+                  onChange={(e) => {
+                    setName(e.target.value);
                   }}
                 />
                 <input
@@ -80,8 +90,8 @@ function SignUp() {
                   className="form-control mb-4"
                   placeholder="enter your Password"
                   value={password}
-                  onChange={(e)=>{
-                    setPassword(e.target.value)
+                  onChange={(e) => {
+                    setPassword(e.target.value);
                   }}
                 />
                 <input
@@ -89,8 +99,8 @@ function SignUp() {
                   className="form-control mb-4"
                   placeholder="enter your address"
                   value={address}
-                  onChange={(e)=>{
-                    setAddress(e.target.value)
+                  onChange={(e) => {
+                    setAddress(e.target.value);
                   }}
                 />
               </div>
@@ -101,8 +111,8 @@ function SignUp() {
                   className="form-control mb-4"
                   placeholder="enter your email"
                   value={email}
-                  onChange={(e)=>{
-                    setEmail(e.target.value)
+                  onChange={(e) => {
+                    setEmail(e.target.value);
                   }}
                 />
                 <input
@@ -110,8 +120,8 @@ function SignUp() {
                   className="form-control mb-4"
                   placeholder="enter your mobile"
                   value={mobile}
-                  onChange={(e)=>{
-                    setMobile(e.target.value)
+                  onChange={(e) => {
+                    setMobile(e.target.value);
                   }}
                 />
                 <div className="d-flex justify-content-around">
@@ -121,7 +131,7 @@ function SignUp() {
                       id="male"
                       name="gender"
                       className="gender mb-4"
-                      checked={gender === 'male'}
+                      checked={gender === "male"}
                       onClick={() => {
                         setGender("male");
                       }}
@@ -135,7 +145,7 @@ function SignUp() {
                       id="female"
                       name="gender"
                       className="gender mb-4"
-                      checked={gender === 'female'}
+                      checked={gender === "female"}
                       onClick={() => {
                         setGender("female");
                       }}
@@ -144,8 +154,11 @@ function SignUp() {
                   </div>
                 </div>
               </div>
-              <button type="button" className="btn btn-dark w-100 mb-3" onClick={signupUser}
->
+              <button
+                type="button"
+                className="btn btn-dark w-100 mb-3"
+                onClick={signupUser}
+              >
                 SignUp
               </button>
               <p className="text-center">

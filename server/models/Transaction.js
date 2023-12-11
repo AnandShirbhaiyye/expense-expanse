@@ -20,6 +20,7 @@ const transactionSchema = new Schema(
         "shopping",
         "travel",
         "education",
+        "salary",
         "other",
       ],
       default: "other",
