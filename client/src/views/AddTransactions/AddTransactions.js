@@ -1,12 +1,14 @@
-import React from 'react'
-import Navbar from '../../components/Navbar/Navbar'
+import React from "react";
+import "./AddTransactions.css";
+import Navbar from "../../components/Navbar/Navbar";
 
 function AddTransactions() {
   return (
-   <>
-   <Navbar/>
-   </>
-  )
+    <>
+      <Navbar />
+      
+    </>
+  );
 }
 
-export default AddTransactions
+export default AddTransactions;
