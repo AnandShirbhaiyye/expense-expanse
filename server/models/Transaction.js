@@ -21,6 +21,8 @@ const transactionSchema = new Schema(
         "travel",
         "education",
         "salary",
+        "freelancing",
+        "side-hussle",
         "other",
       ],
       default: "other",

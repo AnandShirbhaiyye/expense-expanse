@@ -85,6 +85,8 @@ function AddTransactions() {
                       <option value="travel">Travel</option>
                       <option value="education">Education</option>
                       <option value="salary">Salary</option>
+                      <option value="freelancing">Freelancing</option>
+                      <option value="side-hussle">Side-hussle</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
