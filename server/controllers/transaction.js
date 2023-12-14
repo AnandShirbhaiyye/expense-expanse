@@ -59,4 +59,31 @@ const getApiTransactionById = async (req, res) => {
   }
 };
 
-export { postApiTransaction, getApiTransaction, getApiTransactionById };
+const getApiTransactionByUserId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const finduserTrans = await Transaction.find({ user: id }).populate("user");
+
+    finduserTrans.forEach((singleTransaction) => {
+      singleTransaction.user.password = undefined;
+    });
+    res.json({
+      success: true,
+      data: finduserTrans,
+      message: "user fetch transaction successfully...",
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+export {
+  postApiTransaction,
+  getApiTransaction,
+  getApiTransactionById,
+  getApiTransactionByUserId,
+};

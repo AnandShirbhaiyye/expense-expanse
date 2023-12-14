@@ -34,6 +34,8 @@ app.get("/api/transactions", getApiTransaction);
 
 app.get("/api/transactions/:id", getApiTransactionById);
 
+app.get('/api/transactions/users/:id',getApitransactionbyUserId)
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
