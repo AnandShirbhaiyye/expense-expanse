@@ -26,7 +26,7 @@ function AddTransactions() {
     showToast(response?.data?.message, 'success', 3000);
 
     if (response?.data?.success) {
-        window.location.href = '/';
+        window.location.href = '/mytransactions';
     }
   }
 

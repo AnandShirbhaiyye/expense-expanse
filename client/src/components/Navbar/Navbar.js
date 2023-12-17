@@ -53,13 +53,22 @@ function Navbar() {
                   Add Transaction
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link
                   className="nav-link active  me-5"
                   aria-current="page"
                   to="/allexpenses"
                 >
                   All Expenses
+                </Link>
+              </li> */}
+              <li className="nav-item">
+                <Link
+                  className="nav-link active  me-5"
+                  aria-current="page"
+                  to="/mytransactions"
+                >
+                  MyTransactions
                 </Link>
               </li>
               <li className="nav-item">
