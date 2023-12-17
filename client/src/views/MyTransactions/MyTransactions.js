@@ -53,7 +53,7 @@ function MyTransactions() {
   return (
    <>
    <Navbar/>
-   <div className='app'>
+   <div className='container'>
         <h1 className='text-center'>All Expenses</h1>
         <h4 className='credit-text'>Credit: {creditSum}</h4>
         <h4 >Debit: {debitSum}</h4>
@@ -68,21 +68,21 @@ function MyTransactions() {
                 <span className={`transaction-amount ${type === 'debit' ? "debit-amount" : "credit-amount"}`}>
                   {type === 'debit' ? "-" : "+"}
                   {amount}</span>
-                {type === 'debit' ? 'debited' : 'credited'}
+               <b>{type === 'debit' ? 'debited' : 'credited'}</b> 
 
                 <span className='transaction-category'>
                   {CATEGORY_EMOJI_MAP[category]}
-                  {category}
+                  {category} 
 
                  
-                 <p>✏️</p>
+                 <button className='btn btn-success edit'>update</button>
 
                 </span>
                 <hr />
                 {description}
                 <span className='date-text'> On {date} at {time}</span>
 
-                <p className='delete'>❌</p>
+                <p className='btn btn-danger delete'>delete</p>
               </div>
             )
           })
