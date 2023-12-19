@@ -62,7 +62,7 @@ function SignUp() {
     console.log(storageUser);
 
     if (storageUser?.email) {
-      showToast("You are already logged in!", "alert", 4000);
+      showToast("You are already logged in!", "danger", 4000);
       window.location.href = "/";
     }
   }, []);

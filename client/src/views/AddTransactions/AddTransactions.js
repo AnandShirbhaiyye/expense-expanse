@@ -36,7 +36,7 @@ function AddTransactions() {
     if (storageUser?.email) {
       setUser(storageUser);
     } else {
-      showToast("You are not logged in!", "alert", 5000);
+      showToast("You are not logged in!", "danger", 5000);
       window.location.href = "/login";
     }
   }, []);

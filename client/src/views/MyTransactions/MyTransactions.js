@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import showToast from "crunchy-toast";
 import axios from "axios";
 import "./MyTransactions.css";
 
@@ -7,6 +8,7 @@ function MyTransactions() {
   const [transaction, setTransaction] = useState([]);
   const [creditSum, setCreditSum] = useState(0);
   const [debitSum, setDebitSum] = useState(0);
+  const [user, setUser] = useState();
 
   const CATEGORY_EMOJI_MAP = {
     food: "🍔",
@@ -47,6 +49,17 @@ function MyTransactions() {
 
   useEffect(() => {
     loadTransaction();
+  }, []);
+
+  useEffect(() => {
+    const userstorageData = JSON.parse(localStorage.getItem("user") || "{}");
+
+    if (userstorageData?.email) {
+      setUser(userstorageData);
+    } else {
+      showToast("you are not logged in!", "danger", 1000);
+      window.location.href = "/login";
+    }
   }, []);
 
   return (

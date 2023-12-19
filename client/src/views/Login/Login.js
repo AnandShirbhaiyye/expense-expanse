@@ -27,7 +27,7 @@ function Login() {
     console.log(storageUser);
 
     if (storageUser?.email) {
-      showToast("You are already logged in!", "alert", 5000);
+      showToast("You are already logged in!", "danger", 5000);
       window.location.href = "/";
     }
   }, []);
