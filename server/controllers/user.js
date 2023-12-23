@@ -53,4 +53,4 @@ const postApiLogin = async (req, res) => {
   }
 };
 
-export { postApiSignup, postApiLogin };
+export { postApiSignup, postApiLogin};
