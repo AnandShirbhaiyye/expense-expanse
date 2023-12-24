@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <>
-      <div className="home-page">
+      {/* <div className="home-page"> */}
         <Navbar />
         <h1 className="text-center mt-5">Expense Expanse💰</h1>
         <div className="container">
@@ -75,7 +75,7 @@ function Home() {
             </div>
           </Link>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

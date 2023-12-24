@@ -4,7 +4,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { getApiHealth } from "./controllers/health.js";
-import { postApiTransaction, getApiTransaction, getApiTransactionById, getApiTransactionByUserId, deleteUserTransactionId } from "./controllers/transaction.js";
+import {
+  postApiTransaction,
+  getApiTransaction,
+  getApiTransactionById,
+  getApiTransactionByUserId,
+  deleteUserTransactionId,
+  updateUserTransaction,
+} from "./controllers/transaction.js";
 import { postApiLogin, postApiSignup } from "./controllers/user.js";
 
 const app = express();
@@ -24,9 +31,9 @@ connectMongoDB();
 
 app.get("/api/health", getApiHealth);
 
-app.post('/signup', postApiSignup);
+app.post("/signup", postApiSignup);
 
-app.post('/login', postApiLogin);
+app.post("/login", postApiLogin);
 
 app.post("/api/transaction", postApiTransaction);
 
@@ -34,9 +41,11 @@ app.get("/api/transactions", getApiTransaction);
 
 app.get("/api/transactions/:id", getApiTransactionById);
 
-app.get('/api/transactions/users/:id',getApiTransactionByUserId)
+app.get("/api/transactions/users/:id", getApiTransactionByUserId);
 
-app.delete('/api/transactions/:id',deleteUserTransactionId)
+app.delete("/api/transactions/:id", deleteUserTransactionId);
+
+app.put("/api/transactions/:id", updateUserTransaction);
 
 const PORT = process.env.PORT || 5000;
 

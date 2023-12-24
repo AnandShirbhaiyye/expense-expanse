@@ -82,21 +82,48 @@ const getApiTransactionByUserId = async (req, res) => {
   }
 };
 
-const deleteUserTransactionId = async (req,res)=>{
-  const {id} = req.params;
-  const deleteTransactionId = await Transaction.deleteOne({_id:id});
+const deleteUserTransactionId = async (req, res) => {
+  const { id } = req.params;
+  const deleteTransactionId = await Transaction.deleteOne({ _id: id });
 
   res.json({
-      success:true,
-      data:deleteTransactionId,
-      message:'delete transaction successfully'
-  })
-}
+    success: true,
+    data: deleteTransactionId,
+    message: "delete transaction successfully",
+  });
+};
+
+const updateUserTransaction = async (req, res) => {
+  const { id } = req.params;
+  const { amount, type, description, category } = req.body;
+
+  await Transaction.updateOne(
+    { _id: id },
+    {
+      $set: {
+        amount: amount,
+        type: type,
+        description: description,
+        category: category,
+      },
+    }
+  );
+
+  const updateTransaction = await Transaction.findOne({ _id: id });
+
+  return responder({
+    res,
+    success: true,
+    message: "transaction update successfully",
+    data: updateTransaction,
+  });
+};
 
 export {
   postApiTransaction,
   getApiTransaction,
   getApiTransactionById,
   getApiTransactionByUserId,
-  deleteUserTransactionId
+  deleteUserTransactionId,
+  updateUserTransaction,
 };
