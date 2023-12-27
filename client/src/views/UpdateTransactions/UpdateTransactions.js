@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import showToast from 'crunchy-toast';
 import "./UpdateTransactions.css";
 import UpTransImg from "./update-transaction.png";
-import {useParams} from 'react-router-dom';
-import axios from 'axios';
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function UpdateTransactions() {
   const [amount, setAmount] = useState("");
@@ -14,20 +15,36 @@ function UpdateTransactions() {
   const { id } = useParams();
 
   const fetchTrans = async () => {
-    const response = await axios.get(`/api/transactions/${id}`)
+    const response = await axios.get(`/api/transactions/${id}`);
     const { amount, type, description, category } = response.data.data;
 
-    setAmount(amount)
-    setType(type)
-    setDescription(description)
-    setCategory(category)
-  }
+    setAmount(amount);
+    setType(type);
+    setDescription(description);
+    setCategory(category);
+  };
   useEffect(() => {
-    fetchTrans()
-  }, [])
+    fetchTrans();
+  }, []);
 
+  const updateTrans = async () => {
+    const response = await axios.put(`/api/transactions/${id}`, {
+      amount,
+      type,
+      description,
+      category
+    })
 
-  const updateTrans = async () => {};
+    if (response?.data?.data) {
+      showToast("Transaction updated successfully", 'success', '3000');
+      window.location.href = '/mytransactions'
+    }
+
+    setAmount('')
+    setCategory('')
+    setDescription('')
+    setType('')
+  };
   return (
     <>
       <Navbar />
