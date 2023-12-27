@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./UpdateTransactions.css";
 import UpTransImg from "./update-transaction.png";
+import {useParams} from 'react-router-dom';
+import axios from 'axios';
 
 function UpdateTransactions() {
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+
+  const { id } = useParams();
+
+  const fetchTrans = async () => {
+    const response = await axios.get(`/api/transactions/${id}`)
+    const { amount, type, description, category } = response.data.data;
+
+    setAmount(amount)
+    setType(type)
+    setDescription(description)
+    setCategory(category)
+  }
+  useEffect(() => {
+    fetchTrans()
+  }, [])
+
 
   const updateTrans = async () => {};
   return (
