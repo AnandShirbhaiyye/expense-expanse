@@ -8,9 +8,11 @@ import SignUp from './views/SignUp/SignUp';
 import AddTransactions from './views/AddTransactions/AddTransactions';
 import AllExpenses from './views/AllExpenses/AllExpenses';
 import MyTransactions from './views/MyTransactions/MyTransactions';
+
 //boostrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import UpdateTransactions from './views/UpdateTransactions/UpdateTransactions';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
   {
     path:'/mytransactions',
     element:<MyTransactions/>
+  },
+  {
+    path:'/updateTransaction/:id',
+    element:<UpdateTransactions/>
   }
 ])
 root.render(<RouterProvider router = {router} />

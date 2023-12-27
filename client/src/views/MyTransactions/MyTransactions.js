@@ -51,14 +51,18 @@ function MyTransactions() {
     loadTransaction();
   }, []);
 
-  const deleteUserTransactionId = async(id) =>{
+  const transactionUpdate = async(id)=>{
+    window.location.href=`/updateTransaction/${id}`
+  }
+
+  const deleteUserTransactionId = async (id) => {
     const response = await axios.delete(`/api/transactions/${id}`);
 
-    if(response?.data?.success){
-      showToast(response?.data?.message,'success','3000');
+    if (response?.data?.success) {
+      showToast(response?.data?.message, "success", "3000");
       loadTransaction();
     }
-  }
+  };
 
   useEffect(() => {
     const userstorageData = JSON.parse(localStorage.getItem("user") || "{}");
@@ -109,7 +113,14 @@ function MyTransactions() {
                 {CATEGORY_EMOJI_MAP[category]}
                 {category}
 
-                <button className="btn btn-success edit">update</button>
+                <button
+                  className="btn btn-success edit"
+                  onClick={() => {
+                    transactionUpdate(_id);
+                  }}
+                >
+                  update
+                </button>
               </span>
               <hr />
               {description}
@@ -118,7 +129,14 @@ function MyTransactions() {
                 On {date} at {time}
               </span>
 
-              <p className="btn btn-danger delete" onClick={()=>{deleteUserTransactionId(_id)}} >delete</p>
+              <p
+                className="btn btn-danger delete"
+                onClick={() => {
+                  deleteUserTransactionId(_id);
+                }}
+              >
+                delete
+              </p>
             </div>
           );
         })}
