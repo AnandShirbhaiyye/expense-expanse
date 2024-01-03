@@ -69,6 +69,7 @@ const getApiTransactionByUserId = async (req, res) => {
     finduserTrans.forEach((singleTransaction) => {
       singleTransaction.user.password = undefined;
     });
+    
     res.json({
       success: true,
       data: finduserTrans,
